@@ -1,0 +1,9 @@
+ballons-project/env/
+ballons-project/venv/
+db/
+paho.mqtt.python/
+clienteUDP
+clienteUDP.c
+serverUDP.py
+serverUDP.pyc
+sudo
