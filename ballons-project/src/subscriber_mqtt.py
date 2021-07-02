@@ -2,9 +2,11 @@
 from app import mqtt,socketio,json
 import time, datetime
 
+'''
 @mqtt.on_connect()
 def handle_connect(client, userdata, flags, rc):
     mqtt.subscribe('t')
+'''
 
 @socketio.on('subscribe')
 def handle_subscribe(json_str):

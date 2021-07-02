@@ -3,8 +3,8 @@ import eventlet
 eventlet.monkey_patch()
 #eventlet.monkey_patch(socket=True, select=True)
 """
-from subscriber_mqtt import handle_mqtt_message, handle_subscribe, handle_unsubscribe_all, handle_connect
-from models import Transaccion, UsuarioTransaccion
+
+
 import json
 from flask import Flask, render_template, request, redirect, url_for, jsonify
 from flask_socketio import SocketIO, send
@@ -26,8 +26,10 @@ app = Flask(__name__)
 # Conexion BD RAM
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:////tmp/test.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-#db = SQLAlchemy(app)
-#ma = Marshmallow(app)
+db = SQLAlchemy(app)
+ma = Marshmallow(app)
+from models import Transaccion, UsuarioTransaccion
+
 
 # MQTT config
 app.config['MQTT_BROKER_URL'] = 'localhost'  # use the free broker from HIVEMQ
@@ -45,14 +47,15 @@ app.config['MQTT_TLS_ENABLED'] = False
 # app.config['MQTT_TLS_ENABLED'] = True
 # app.config['MQTT_TLS_INSECURE'] = True
 # app.config['MQTT_TLS_CA_CERTS'] = 'ca.crt'
-#mqtt = Mqtt(app)
-
+mqtt = Mqtt(app)
 
 # SocketIO
-#socketio = SocketIO(app)
+socketio = SocketIO(app)
 
 # Bootstrap
-#bootstrap = Bootstrap(app)
+bootstrap = Bootstrap(app)
+
+
 
 
 Peso = None
@@ -114,16 +117,22 @@ def register():
         return redirect(url_for('login'))
     return render_template('register.html', form=form)
 
-#socketio.run(app, host='0.0.0.0', port=5000, use_reloader=False, debug=False)
+
+
+
+
+socketio.run(app, host='0.0.0.0', port=5000, use_reloader=False, debug=False)
+
+from subscriber_mqtt import handle_mqtt_message, handle_subscribe, handle_unsubscribe_all
 
 print("el nombre es " + __name__)
 if __name__ == "__main__":
     print("el nombre es " + __name__)
-    db = SQLAlchemy(app)
-    ma = Marshmallow(app)
-    mqtt = Mqtt(app)
-    socketio = SocketIO(app)
-    bootstrap = Bootstrap(app)
+    #db = SQLAlchemy(app)
+    #ma = Marshmallow(app)
+    #mqtt = Mqtt(app)
+    #socketio = SocketIO(app)
+    #bootstrap = Bootstrap(app)
 
     db.create_all()
     #t = Transaccion.query.all()
@@ -137,16 +146,16 @@ if __name__ == "__main__":
     client.subscribe = handle_connect
     client.loop_start() 
     """
-    socketio.run(app, host='0.0.0.0', port=5000, use_reloader=False, debug=False)
+    #socketio.run(app, host='0.0.0.0', port=5000, use_reloader=False, debug=False)
 
 else:
     
     print("el nombre es " + __name__)
-    db = SQLAlchemy(app)
-    ma = Marshmallow(app)
-    mqtt = Mqtt(app)
-    socketio = SocketIO(app)
-    bootstrap = Bootstrap(app)
+    #db = SQLAlchemy(app)
+    #ma = Marshmallow(app)
+    #mqtt = Mqtt(app)
+    #socketio = SocketIO(app)
+    #bootstrap = Bootstrap(app)
 
     db.create_all()
     t = Transaccion.query.all()

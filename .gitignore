@@ -1,5 +1,6 @@
 ballons-project/env/
 ballons-project/venv/
+ballons-project/src/__pycache__/
 db/
 paho.mqtt.python/
 clienteUDP
@@ -7,3 +8,5 @@ clienteUDP.c
 serverUDP.py
 serverUDP.pyc
 sudo
+client_sub_mqtt.py
+
